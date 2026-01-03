@@ -18,3 +18,6 @@ Testing
 .idea/
 cmake-build-*/
 out/
+
+# LSPs
+.clangd

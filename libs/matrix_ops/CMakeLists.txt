@@ -13,7 +13,7 @@ set_target_properties(matrix_ops PROPERTIES
 )
 
 target_include_directories(matrix_ops
-   PUBLIC include
+    PUBLIC include
 )
 
 target_link_libraries(matrix_ops
@@ -21,3 +21,10 @@ target_link_libraries(matrix_ops
 
 
 add_subdirectory(src)
+
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+
+    target_link_libraries(calcudator_test PRIVATE
+        matrix_ops)
+endif (BUILD_TESTING)
