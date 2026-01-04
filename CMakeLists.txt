@@ -16,18 +16,28 @@ target_compile_options(calcudator PRIVATE
 )
 
 if (BUILD_TESTING)
-    include(FetchContent)
+    function(load_google_test)
+        include(GoogleTest OPTIONAL)
 
-    FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-    )
+        if (GoogleTest)
+            return()
+        endif()
 
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+        include(FetchContent)
 
-    FetchContent_MakeAvailable(googletest)
+        FetchContent_Declare(
+            googletest
+            URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+        )
 
-    include(GoogleTest)
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+        FetchContent_MakeAvailable(googletest)
+
+        include(GoogleTest)
+    endfunction()
+
+    load_google_test()
 
     add_executable(calcudator_test)
 
@@ -40,20 +50,15 @@ if (BUILD_TESTING)
         -Wall
         -Wextra
         -pedantic
-        -fsanitize=address
     )
-
-    target_link_options(calcudator_test PRIVATE
-        -fsanitize=address
-    )
-ENDIF (BUILD_TESTING)
+endif ()
 
 add_subdirectory(libs)
 add_subdirectory(src)
 
 if (BUILD_TESTING)
-    target_link_libraries(calcudator_test PRIVATE
-        matrix_ops)
+    target_link_libraries(calcudator_test
+        PRIVATE GTest::gtest_main)
 
     gtest_discover_tests(calcudator_test)
 ENDIF (BUILD_TESTING)
