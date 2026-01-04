@@ -14,6 +14,7 @@ set_target_properties(matrix_ops PROPERTIES
 
 target_include_directories(matrix_ops
     PUBLIC include
+    PRIVATE internals
 )
 
 target_link_libraries(matrix_ops

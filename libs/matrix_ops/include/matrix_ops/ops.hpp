@@ -1,9 +1,8 @@
 #pragma once
 
-#include <boost/numeric/ublas/matrix.hpp>
+#include <matrix_ops/matrix.hpp>
 
 namespace matrix_ops {
-    using ::boost::numeric::ublas::matrix;
 
     matrix<int> add(const matrix<int>& a, const matrix<int>& b);
 
