@@ -26,6 +26,6 @@ add_subdirectory(src)
 if (BUILD_TESTING)
     add_subdirectory(tests)
 
-    target_link_libraries(calcudator_test PRIVATE
-        matrix_ops)
+    target_link_libraries(calcudator_test
+        PRIVATE matrix_ops)
 endif (BUILD_TESTING)
