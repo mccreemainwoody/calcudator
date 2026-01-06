@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 4.2.1)
 
 target_sources(calcudator_test
-    PRIVATE add.cpp sub.cpp test_parameters.cpp)
+    PRIVATE add.cpp sub.cpp mult.cpp test_parameters.cpp)
 
 target_link_libraries(calcudator_test
     PRIVATE matrix_ops)
