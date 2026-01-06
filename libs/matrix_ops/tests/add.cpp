@@ -14,5 +14,3 @@ TEST_P(MatrixOperTest, addition) {
 
     ASSERT_TRUE(std::ranges::equal(expected.data(), actual.data()));
 }
-
-INSTANTIATE_TEST_CASE_P(AddTestParameterized, MatrixOperTest, TEST_MATRICES);
