@@ -8,11 +8,12 @@ set_target_properties(calcudator PROPERTIES
     CXX_STANDARD 23
 )
 
-target_compile_options(calcudator PRIVATE
-    -Werror
-    -Wall
-    -Wextra
-    -pedantic
+target_compile_options(calcudator
+    PRIVATE
+        -Werror
+        -Wall
+        -Wextra
+        -pedantic
 )
 
 if (BUILD_TESTING)
@@ -37,6 +38,8 @@ if (BUILD_TESTING)
         include(GoogleTest)
     endfunction()
 
+    enable_testing()
+
     load_google_test()
 
     add_executable(calcudator_test)
@@ -45,11 +48,12 @@ if (BUILD_TESTING)
         CXX_STANDARD 23
     )
 
-    target_compile_options(calcudator_test PRIVATE
-        -Werror
-        -Wall
-        -Wextra
-        -pedantic
+    target_compile_options(calcudator_test
+        PRIVATE
+            -Werror
+            -Wall
+            -Wextra
+            -pedantic
     )
 endif ()
 
