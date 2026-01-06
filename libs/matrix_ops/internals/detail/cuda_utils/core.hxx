@@ -2,3 +2,4 @@
 
 #include "check_error.cuh"
 #include "conversions.cuh"
+#include "operation.cuh"
