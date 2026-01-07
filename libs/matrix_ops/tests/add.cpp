@@ -4,7 +4,7 @@
 
 #include "test_parameters.hpp"
 
-TEST_P(MatrixOperTest, addition) {
+TEST_P(MatrixInterOperTest, addition) {
     const MatrixOperTestParams param = GetParam();
     const MatrixOperTestParams::matrix_t& a = param.a;
     const MatrixOperTestParams::matrix_t& b = param.b;

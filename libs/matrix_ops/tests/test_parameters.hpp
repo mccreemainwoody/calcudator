@@ -7,8 +7,9 @@
 
 #include "gtest/gtest.h"
 
+using matrix_shape_t = std::pair<std::size_t, std::size_t>;
+
 struct MatrixOperTestParams {
-    using matrix_shape_t = std::pair<std::size_t, std::size_t>;
     using matrix_data_t = std::vector<int>;
     using matrix_t = matrix_ops::matrix<int, boost::numeric::ublas::row_major,
                                         matrix_data_t>;
@@ -23,7 +24,29 @@ struct MatrixOperTestParams {
     }
 };
 
-class MatrixOperTest : public ::testing::TestWithParam<MatrixOperTestParams> {};
+struct MatrixScalarOperTestParams {
+    using matrix_data_t = std::vector<int>;
+    using matrix_t = matrix_ops::matrix<int, boost::numeric::ublas::row_major,
+                                        matrix_data_t>;
+
+    const int k;
+    matrix_t a;
+
+    MatrixScalarOperTestParams(const matrix_shape_t shape, matrix_data_t a_data,
+                               const int k)
+        : k(k)
+        , a(shape.first, shape.second, std::move(a_data)) {
+    }
+};
+
+class MatrixInterOperTest
+    : public ::testing::TestWithParam<MatrixOperTestParams> {};
+
+class MatrixScalarOperTest
+    : public ::testing::TestWithParam<MatrixScalarOperTestParams> {};
 
 extern const testing::internal::ParamGenerator<MatrixOperTestParams>
-    TEST_MATRICES;
+    TEST_INTER_MATRICES;
+
+extern const testing::internal::ParamGenerator<MatrixScalarOperTestParams>
+    TEST_SCALAR_MATRICES;
