@@ -10,6 +10,8 @@ namespace matrix_ops {
 
     matrix<int> mult(const matrix<int>& a, const matrix<int>& b);
 
+    matrix<int> mult(const matrix<int>& a, const int k);
+
     matrix<int> dot(const matrix<int>& a, const matrix<int>& b);
 
     matrix<int> inv(const matrix<int>& a, const matrix<int>& b);

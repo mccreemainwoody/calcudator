@@ -4,7 +4,7 @@
 #include "array.hpp"
 #include "cuda_utils.cuh"
 
-__global__ void mult_kernel(int* out, const int* a, const int* b) {
+__global__ void mult_value_kernel(int* out, const int* a, const int* b) {
     const std::size_t index = blockDim.x * blockIdx.x + threadIdx.x;
 
     out[index] = a[index] * b[index];
@@ -13,6 +13,6 @@ __global__ void mult_kernel(int* out, const int* a, const int* b) {
 namespace matrix_ops {
 
     matrix<int> mult(const matrix<int>& a, const matrix<int>& b) {
-        return perform_operation(a, b, mult_kernel);
+        return perform_operation(a, b, mult_value_kernel);
     }
 } // namespace matrix_ops
