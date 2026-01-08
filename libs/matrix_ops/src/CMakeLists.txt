@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.2.1)
 
 target_sources(matrix_ops
-   PRIVATE add.cu dot.cu mult_value.cu mult_scalar.cu sub.cu
+   PRIVATE add.cu dot.cu mult_value.cu mult_scalar.cu div_scalar.cu sub.cu
 )
