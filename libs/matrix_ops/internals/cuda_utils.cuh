@@ -12,6 +12,10 @@ inline void cudaCheckError(const cudaError_t error, const char* source_file,
 
 inline void cudaCheckError(const char* source_file, const int source_line);
 
+constexpr int determine_blocks(const int elements);
+
+constexpr int determine_threads_per_block(const int elements);
+
 namespace matrix_ops {
 
     template <typename T>
@@ -20,6 +24,14 @@ namespace matrix_ops {
         { kernel(out, a, b) } -> std::same_as<void>;
         kernel<<<n_blocks, n_threads>>>(out, a, b);
     };
+
+    template <typename T>
+    concept kernel_scalar_t =
+        requires(T kernel, int* out, const int* a, const int b,
+                 std::size_t n_blocks, std::size_t n_threads) {
+            { kernel(out, a, b) } -> std::same_as<void>;
+            kernel<<<n_blocks, n_threads>>>(out, a, b);
+        };
 
     template <typename T>
     T* initialize_cuda_1d_array(const std::size_t size);
@@ -34,6 +46,10 @@ namespace matrix_ops {
     template <kernel_t T>
     inline matrix<int> perform_operation(const matrix<int>& a,
                                          const matrix<int>& b, T operation);
+
+    template <kernel_scalar_t T>
+    inline matrix<int> perform_operation(const matrix<int>& a, const int k,
+                                         T operation);
 } // namespace matrix_ops
 
 #include "detail/cuda_utils/core.hxx"
